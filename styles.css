@@ -1,0 +1,227 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;500;600;700;800;900&display=swap');
+
+:root {
+  --main-color: #4a90e2; /* Deep Blue */
+  --secondary-color: #ffcc29; /* Gold */
+  --background-color: #0f1624; /* Dark Blue */
+  --text-color: #ffffff; /* White */
+  --shadow-color: rgba(0, 0, 0, 0.2);
+  --pulse-color: #ffffff; /* White */
+  --pulse-shadow-color: rgba(255, 255, 255, 0.7);
+  --font-main: 'Poppins', sans-serif;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: var(--font-main);
+}
+
+body {
+  background: var(--background-color);
+  color: var(--text-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+.container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#time {
+  display: flex;
+  gap: 40px;
+}
+
+#time .circle {
+  position: relative;
+  width: 150px;
+  height: 150px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(to right, var(--main-color), var(--secondary-color));
+  border-radius: 50%;
+  box-shadow: 0 0 30px var(--shadow-color);
+  transition: background 0.3s ease-in-out;
+}
+
+#time .circle:hover {
+  background: linear-gradient(to right, var(--secondary-color), var(--main-color));
+}
+
+#time .circle svg {
+  width: 100%;
+  height: 100%;
+  transform: rotate(270deg);
+  animation: rotate 2s infinite linear;
+  will-change: transform;
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+#time .circle svg circle {
+  width: 100%;
+  height: 100%;
+  fill: transparent;
+  stroke: var(--main-color);
+  stroke-width: 4px;
+  transform: translate(5px, 5px);
+  transition: stroke-dashoffset 0.5s ease-in-out;
+}
+
+#time .circle svg circle:nth-child(2) {
+  stroke-dasharray: 440;
+  stroke-dashoffset: 440;
+  animation: dash 2s forwards ease-in-out;
+}
+
+@keyframes dash {
+  from {
+    stroke-dashoffset: 440;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+#time div {
+  position: absolute;
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--text-color);
+}
+
+#time div span {
+  position: absolute;
+  transform: translate(-50%, 0px);
+  font-size: 0.8rem;
+  font-weight: 300;
+  letter-spacing: 0.1rem;
+  text-transform: uppercase;
+  color: var(--text-color);
+}
+
+#time .ap {
+  position: relative;
+  font-size: 1rem;
+  transform: translate(-20px);
+}
+
+.dots {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  z-index: 10;
+}
+
+.dots::before {
+  content: '';
+  position: absolute;
+  top: -3px;
+  width: 15px;
+  height: 15px;
+  background: var(--pulse-color);
+  border-radius: 50%;
+  box-shadow: 0 0 20px var(--pulse-shadow-color), 0 0 60px var(--pulse-shadow-color);
+  animation: pulse 1s infinite ease-in-out;
+  will-change: transform, box-shadow;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(0.8);
+  }
+  50% {
+    transform: scale(1);
+  }
+}
+
+header {
+  text-align: center;
+  padding: 30px;
+  background: linear-gradient(to right, var(--main-color), var(--secondary-color));
+  color: var(--text-color);
+  box-shadow: 0 4px 20px var(--shadow-color);
+}
+
+header h1 {
+  margin: 0;
+  font-size: 3rem;
+  font-weight: 900;
+  letter-spacing: 3px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+
+body.dark-mode {
+    background-color: #121212; /* Dark background color */
+    color: #ffffff; /* Light text color */
+}
+
+#dark-mode-toggle {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+    color: #ffffff;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    font-family: 'Poppins', sans-serif; /* Add a modern font */
+}
+
+#dark-mode-toggle label {
+    margin-right: 8px;
+    font-size: 14px;
+}
+
+#darkModeToggle {
+    display: none;
+}
+
+#dark-mode-toggle .slider {
+    position: relative;
+    display: inline-block;
+    width: 40px;
+    height: 20px;
+    background-color: #333;
+    border-radius: 20px;
+    transition: background-color 0.3s;
+}
+
+#dark-mode-toggle .slider:before {
+    content: '';
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    background-color: #fff;
+    border-radius: 50%;
+    transition: transform 0.3s;
+    box-shadow: 0 0 5px rgba(255, 255, 255, 0.5); /* Add a subtle glow effect */
+}
+
+#darkModeToggle:checked + .slider {
+    background-color: #4CAF50;
+}
+
+#darkModeToggle:checked + .slider:before {
+    transform: translateX(20px);
+}
+
